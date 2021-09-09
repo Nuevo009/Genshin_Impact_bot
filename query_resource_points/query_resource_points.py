@@ -24,7 +24,7 @@ Image.MAX_IMAGE_PIXELS = None
 
 # 这个常量放在up_map()函数里更新
 CENTER = None
-DISTANCE = 500
+DISTANCE = 1200
 
 zoom = 0.5
 resource_icon_offset = (-int(150*0.5*zoom),-int(150*zoom))
