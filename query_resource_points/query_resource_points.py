@@ -168,6 +168,7 @@ def grouping(point_list):
             point_list = unclassified
 
             if not loop_fiag:
+                son_list = list(set(son_list))
                 nested_list.append(son_list)
 
     return nested_list
