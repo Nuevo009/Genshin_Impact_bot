@@ -24,10 +24,11 @@ Image.MAX_IMAGE_PIXELS = None
 
 # 这个常量放在up_map()函数里更新
 CENTER = None
-DISTANCE = 1000
+DISTANCE = 500
 
 zoom = 0.5
 resource_icon_offset = (-int(150*0.5*zoom),-int(150*zoom))
+map_min_hw = 500
 
 
 data = {
@@ -168,7 +169,6 @@ def grouping(point_list):
             point_list = unclassified
 
             if not loop_fiag:
-                son_list = list(set(son_list))
                 nested_list.append(son_list)
 
     return nested_list
@@ -314,15 +314,15 @@ class Resource_map(object):
         self.x_end += 150
         self.y_end += 150
 
-        # 如果图片裁切的太小会看不出资源的位置在哪，检查图片裁切的长和宽看够不够1000，不到1000的按1000裁切
-        if (self.x_end - self.x_start)<1000:
+        # 如果图片裁切的太小会看不出资源的位置在哪，检查图片裁切的长和宽看够不够
+        if (self.x_end - self.x_start)<map_min_hw:
             center = int((self.x_end + self.x_start) / 2)
-            self.x_start = center - 500
-            self.x_end  = center +500
-        if (self.y_end - self.y_start)<1000:
+            self.x_start = center - map_min_hw/2
+            self.x_end  = center + map_min_hw/2
+        if (self.y_end - self.y_start)<map_min_hw:
             center = int((self.y_end + self.y_start) / 2)
-            self.y_start = center - 500
-            self.y_end  = center +500
+            self.y_start = center - map_min_hw/2
+            self.y_end  = center + map_min_hw/2
 
         self.map_image = self.map_image.crop((self.x_start,self.y_start,self.x_end,self.y_end))
 
