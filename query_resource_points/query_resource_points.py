@@ -28,7 +28,7 @@ DISTANCE = 1200
 
 zoom = 0.5
 resource_icon_offset = (-int(150*0.5*zoom),-int(150*zoom))
-map_min_hw = 1000
+map_min_hw = 750
 
 
 data = {
@@ -149,19 +149,19 @@ def grouping(point_list):
             loop_fiag = False
             unclassified = []
             for unclassified_index in range(1,len(point_list)):
-                add_flag = True
                 for i in range(index,len(son_list)):
                     x1 = son_list[i]["x_pos"]
                     y1 = son_list[i]["y_pos"]
                     x2 = point_list[unclassified_index]["x_pos"]
                     y2 = point_list[unclassified_index]["y_pos"]
+                    if x1 == x2 and y1 == y2:
+                        break
                     if is_point_distance(x1,y1,x2,y2):
                         temp_list.append(point_list[unclassified_index])
-                        add_flag = False
                         loop_fiag = True
                         break
-                if add_flag:
-                    unclassified.append(point_list[unclassified_index])
+                    else:
+                        unclassified.append(point_list[unclassified_index])
 
             for point in temp_list:
                 son_list.append(point)
