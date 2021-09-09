@@ -317,12 +317,12 @@ class Resource_map(object):
         # 如果图片裁切的太小会看不出资源的位置在哪，检查图片裁切的长和宽看够不够
         if (self.x_end - self.x_start)<map_min_hw:
             center = int((self.x_end + self.x_start) / 2)
-            self.x_start = center - map_min_hw/2
-            self.x_end  = center + map_min_hw/2
+            self.x_start = int(center - map_min_hw/2)
+            self.x_end  = int(center + map_min_hw/2)
         if (self.y_end - self.y_start)<map_min_hw:
             center = int((self.y_end + self.y_start) / 2)
-            self.y_start = center - map_min_hw/2
-            self.y_end  = center + map_min_hw/2
+            self.y_start = int(center - map_min_hw/2)
+            self.y_end  = int(center + map_min_hw/2)
 
         self.map_image = self.map_image.crop((self.x_start,self.y_start,self.x_end,self.y_end))
 
