@@ -28,7 +28,7 @@ DISTANCE = 1200
 
 zoom = 0.5
 resource_icon_offset = (-int(150*0.5*zoom),-int(150*zoom))
-map_min_hw = 500
+map_min_hw = 1000
 
 
 data = {
@@ -359,7 +359,7 @@ def get_resource_map_mes(name):
     mes = f"资源 {name} 的位置如下\n"
     for point_list in data["sort_resource_point_list"][resource_id]:
         map = Resource_map(name,point_list)
-        count += map.get_resource_count()
+        count += len(point_list)
         mes += map.get_cq_cod()
 
     mes += f"\n\n※ {name} 一共找到 {count} 个位置点\n※ 数据来源于米游社wiki"
