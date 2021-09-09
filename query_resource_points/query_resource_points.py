@@ -12,7 +12,7 @@ import math
 
 LABEL_URL      = 'https://api-static.mihoyo.com/common/blackboard/ys_obc/v1/map/label/tree?app_sn=ys_obc'
 POINT_LIST_URL = 'https://api-static.mihoyo.com/common/blackboard/ys_obc/v1/map/point/list?map_id=2&app_sn=ys_obc'
-MAP_URL = "https://api-static.mihoyo.com/common/map_user/ys_obc/v1/map/info?map_id=2&app_sn=ys_obc&lang=zh-cn"
+MAP_URL        = "https://api-static.mihoyo.com/common/map_user/ys_obc/v1/map/info?map_id=2&app_sn=ys_obc&lang=zh-cn"
 
 header = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
@@ -134,33 +134,65 @@ def is_point_distance(x1,y1,x2,y2,distance = DISTANCE):
 
     return math.sqrt(x*x + y*y) < distance
 
+def grouping(point_list):
+    # 对资源点进行分组，传入一个资源点列表，遍历列表把里的近的点位放在一起，
+    # 最后返回一个嵌套的列表
+    nested_list = []
+    while point_list:
+        son_list = []
+        temp_list = []
+        index = 0
+        son_list.append(point_list[0])
+        loop_fiag = True
+        while loop_fiag:
+            loop_fiag = False
+            unclassified = []
+            for unclassified_index in range(1,len(point_list)):
+                add_flag = True
+                for i in range(index,len(son_list)):
+                    x1 = son_list[i]["x_pos"]
+                    y1 = son_list[i]["y_pos"]
+                    x2 = point_list[unclassified_index]["x_pos"]
+                    y2 = point_list[unclassified_index]["y_pos"]
+                    if is_point_distance(x1,y1,x2,y2):
+                        temp_list.append(point_list[unclassified_index])
+                        add_flag = False
+                        loop_fiag = True
+                        break
+                if add_flag:
+                    unclassified.append(point_list[unclassified_index])
+
+            for point in temp_list:
+                son_list.append(point)
+            index = len(son_list) - 1
+            point_list = unclassified
+
+            if not loop_fiag:
+                nested_list.append(son_list)
+
+    return nested_list
+
 
 def sort_resource_point():
-    # 分类资源点
+    # 遍历资源点，把资源点按照ID进行分类，然后调用 grouping() 来对点的距离进行分组
 
     for resource_point in data["all_resource_point_list"]:
         resource_id = str(resource_point["label_id"])
         x_pos = resource_point["x_pos"]
         y_pos = resource_point["y_pos"]
         if not resource_id in data["sort_resource_point_list"]:
-            # 第一次分组  注意这是一个多层列表嵌套
-            new_list = [
-                    [{"x_pos":x_pos,"y_pos":y_pos}]
-                    ]
+            # 第一次分组
+            new_list = [{"x_pos":x_pos,"y_pos":y_pos}]
             data["sort_resource_point_list"].setdefault(resource_id,new_list)
             continue
+        else:
+            # 如果有了这个ID直接添加数据
+            temp_dict = {"x_pos":x_pos,"y_pos":y_pos}
+            data["sort_resource_point_list"][resource_id].append(temp_dict)
 
-        add_list = True
-        for group in data["sort_resource_point_list"][resource_id]:
-            for pos in group:
-                if is_point_distance(x_pos, y_pos, pos["x_pos"], pos["y_pos"]):
-                    group.append({"x_pos": x_pos, "y_pos": y_pos})
-                    add_list = False
-                    break
+    for resource_id in data["sort_resource_point_list"].keys():
+        data["sort_resource_point_list"][resource_id] = grouping(data["sort_resource_point_list"][resource_id])
 
-        if add_list:
-            test_list = [{"x_pos": x_pos, "y_pos": y_pos}]
-            data["sort_resource_point_list"][resource_id].append(test_list)
 
 
 def up_label_and_point_list():
