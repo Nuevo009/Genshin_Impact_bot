@@ -1,3 +1,6 @@
+只接受pr，提issue请去[原仓库](https://github.com/H-K-Y/Genshin_Impact_bot)
+
+***
 # Genshin_Impact_bot
 
 <img src="https://img.shields.io/github/license/H-K-Y/Genshin_Impact_bot.svg"/> <img src="https://img.shields.io/github/repo-size/H-K-Y/Genshin_Impact_bot.svg"/> <img src="https://img.shields.io/github/last-commit/H-K-Y/Genshin_Impact_bot.svg"/> <img src="https://img.shields.io/badge/language-python-3572A5.svg"/>

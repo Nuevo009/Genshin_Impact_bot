@@ -36,7 +36,7 @@ with open(os.path.join(FILE_PATH,'gid_pool.json'),'r',encoding='UTF-8') as f:
 
 
 
-@sv.on_prefix(["相遇之缘"], only_to_me=True)
+@sv.on_prefix(["相遇之缘","10"], only_to_me=True)
 async def gacha_(bot, ev):
     gid = str(ev.group_id)
     userid = ev['user_id']
@@ -50,7 +50,7 @@ async def gacha_(bot, ev):
     daily_limiter_10.increase(userid)
     await bot.send(ev, G.gacha_10() , at_sender=True)
 
-@sv.on_prefix(["纠缠之缘"], only_to_me=True)
+@sv.on_prefix(["纠缠之缘","90"], only_to_me=True)
 async def gacha_(bot, ev):
     gid = str(ev.group_id)
     userid = ev['user_id']
@@ -66,7 +66,7 @@ async def gacha_(bot, ev):
 
 
 
-@sv.on_prefix(["原之井"], only_to_me=True)
+@sv.on_prefix(["原之井","井"], only_to_me=True)
 async def gacha_(bot, ev):
     gid = str(ev.group_id)
     userid = ev['user_id']

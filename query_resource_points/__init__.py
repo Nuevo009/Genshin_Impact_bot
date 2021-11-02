@@ -4,8 +4,8 @@ from .query_resource_points import get_resource_map_mes,get_resource_list_mes,in
 
 sv = Service("原神资源查询")
 
-@sv.on_suffix(('在哪', '在哪里', '哪有', '哪里有'))
-@sv.on_prefix(('哪有', '哪里有'))
+@sv.on_suffix(('在哪', '在哪里', '哪有', '哪里有'),only_to_me=True)
+@sv.on_prefix(('哪有', '哪里有'),only_to_me=True)
 async def inquire_resource_points(bot, ev):
 
     resource_name = ev.message.extract_plain_text().strip()
@@ -25,7 +25,7 @@ async def inquire_resource_list(bot , ev):
         data = {
             "type": "node",
             "data": {
-                "name": "色图机器人",
+                "name": "机器人",
                 "uin": "2854196310",
                 "content":txt
                     }

@@ -1,2 +1,11 @@
 .idea
 .idea/*
+__pycache__
+user_info.json
+武器图鉴/
+角色图鉴/
+gid_pool.json
+group_list.json
+query_resource_points/icon/**
+!query_resource_points/icon/0.png
+!query_resource_points/icon/box*

@@ -3,13 +3,14 @@ from hoshino import Service
 sv = Service("原神帮助")
 
 help_txt = '''这是一个HoshinoBot的原神相关插件，包含原神抽卡，丘丘语翻译，找神瞳,找资源点等功能
-插件仓库在 https://github.com/H-K-Y/Genshin_Impact_bot.git
+插件仓库在 https://github.com/Nuevo009/Genshin_Impact_bot ，有想实现的需求可以自己上手pr，或者去原仓库提issue
+插件原仓库在 https://github.com/H-K-Y/Genshin_Impact_bot.git
 
 指令：
 
-@bot相遇之缘：10连抽卡
-@bot纠缠之缘：90连抽卡
-@bot原之井：180连抽卡
+@bot相遇之缘/10：10连抽卡
+@bot纠缠之缘/90：90连抽卡
+@bot原之井/井：180连抽卡
 原神卡池：查看当前UP池
 原神卡池切换：切换其他原神卡池
 更新原神卡池：爬取官方的卡池数据
@@ -17,7 +18,7 @@ help_txt = '''这是一个HoshinoBot的原神相关插件，包含原神抽卡�
 丘丘一下 丘丘语句 ：翻译丘丘语,注意这个翻译只能把丘丘语翻译成中文，不能反向
 丘丘词典 丘丘语句 ：查询丘丘语句的单词含义
 
-XXX哪里有：查询XXX的位置图，XXX是资源的名字
+@botXXX哪里有：查询XXX的位置图，XXX是资源的名字
 原神资源列表：查询所有的资源名称
 
 圣遗物收集
