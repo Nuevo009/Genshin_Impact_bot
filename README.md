@@ -1,4 +1,4 @@
-只接受pr，提issue请去[原仓库](https://github.com/H-K-Y/Genshin_Impact_bot)
+原版的简化版，主要目的是为了让 1c1G 的 Oracle 小机子也能正常运行，只接受 pr，提 issue 请去 [原仓库](https://github.com/H-K-Y/Genshin_Impact_bot)
 
 ***
 # Genshin_Impact_bot
