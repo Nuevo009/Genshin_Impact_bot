@@ -11,10 +11,10 @@ daily_limiter_10 = DailyNumberLimiter(Gacha10Limit)
 daily_limiter_90 = DailyNumberLimiter(Gacha90Limit)
 daily_limiter_180 = DailyNumberLimiter(Gacha180Limit)
 
-sv = Service('--原神抽卡')
+sv = Service('原神抽卡')
 
 group_pool = {
-    # 这个字典保存每个群对应的卡池是哪个，群号字符串为 key，卡池名为 value，群号不包含在字典 key 里卡池按默认 DEFAULT_POOL
+    # 这个字典保存每个群对应的卡池是哪个，群号字符串为key,卡池名为value，群号不包含在字典key里卡池按默认DEFAULT_POOL
 }
 
 def save_group_pool():
@@ -23,13 +23,13 @@ def save_group_pool():
 
 
 
-# 检查 gid_pool.json 是否存在，没有创建空的
+# 检查gid_pool.json是否存在，没有创建空的
 if not os.path.exists(os.path.join(FILE_PATH,'gid_pool.json')):
     save_group_pool()
 
 
 
-# 读取 gid_pool.json 的信息
+# 读取gid_pool.json的信息
 with open(os.path.join(FILE_PATH,'gid_pool.json'),'r',encoding='UTF-8') as f:
     group_pool = json.load(f)
 
@@ -41,7 +41,7 @@ async def gacha_(bot, ev):
     gid = str(ev.group_id) if 'group_id' in dir(ev) else str(ev.guild_id)
     userid = ev['user_id']
     if not daily_limiter_10.check(userid):
-        await bot.send(ev, '今天已经抽了很多次啦，明天再来吧～')
+        await bot.send(ev, '今天已经抽了很多次啦，明天再来吧~')
         return
     if gid in group_pool:
         G = Gacha(group_pool[gid])
@@ -55,7 +55,7 @@ async def gacha_(bot, ev):
     gid = str(ev.group_id) if 'group_id' in dir(ev) else str(ev.guild_id)
     userid = ev['user_id']
     if not daily_limiter_90.check(userid):
-        await bot.send(ev, '今天已经抽了很多次啦，明天再来吧～')
+        await bot.send(ev, '今天已经抽了很多次啦，明天再来吧~')
         return
     if gid in group_pool:
         G = Gacha(group_pool[gid])
@@ -71,7 +71,7 @@ async def gacha_(bot, ev):
     gid = str(ev.group_id) if 'group_id' in dir(ev) else str(ev.guild_id)
     userid = ev['user_id']
     if not daily_limiter_180.check(userid):
-        await bot.send(ev, '今天已经抽了很多次啦，明天再来吧～')
+        await bot.send(ev, '今天已经抽了很多次啦，明天再来吧~')
         return
     daily_limiter_180.increase(userid)
     if gid in group_pool:
@@ -82,7 +82,7 @@ async def gacha_(bot, ev):
 
 
 
-@sv.on_prefix(["原神卡池","原神 up","原神 UP"])
+@sv.on_prefix(["原神卡池","原神up","原神UP"])
 async def gacha_(bot, ev):
     gid = str(ev.group_id) if 'group_id' in dir(ev) else str(ev.guild_id)
 
