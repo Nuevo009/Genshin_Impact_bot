@@ -9,3 +9,6 @@ group_list.json
 query_resource_points/icon/**
 !query_resource_points/icon/0.png
 !query_resource_points/icon/box*
+log
+icon
+!*/icon
