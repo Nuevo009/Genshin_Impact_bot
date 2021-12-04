@@ -11,7 +11,7 @@ daily_limiter_10 = DailyNumberLimiter(Gacha10Limit)
 daily_limiter_90 = DailyNumberLimiter(Gacha90Limit)
 daily_limiter_180 = DailyNumberLimiter(Gacha180Limit)
 
-sv = Service('原神抽卡')
+sv = Service('原神抽卡1')
 
 group_pool = {
     # 这个字典保存每个群对应的卡池是哪个，群号字符串为key,卡池名为value，群号不包含在字典key里卡池按默认DEFAULT_POOL
