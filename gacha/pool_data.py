@@ -9,6 +9,7 @@ import asyncio
 import re
 import os
 import json
+import time
 
 
 
@@ -31,7 +32,7 @@ FONT_PATH = os.path.join(os.path.dirname(FILE_PATH),'artifact_collect',"zh-cn.tt
 FONT=ImageFont.truetype(FONT_PATH, size=20)
 
 
-# 这个字典记录的是3个不同的卡池，每个卡池的抽取列表
+# 这个字典记录的是 3 个不同的卡池，每个卡池的抽取列表
 POOL = collections.defaultdict(
     lambda: {
         '5_star_UP': [],
@@ -45,7 +46,7 @@ POOL = collections.defaultdict(
 
 
 async def get_url_data(url):
-    # 获取url的数据
+    # 获取 url 的数据
     async with httpx.AsyncClient() as client:
         resp = await client.get(url = url,timeout = 10)
         if resp.status_code != 200:
@@ -76,7 +77,7 @@ async def get_role_en_name(ch_name):
 
 
 async def get_arm_id(ch_name):
-    # 从 genshin.honeyhunterworld.com 获取武器的ID
+    # 从 genshin.honeyhunterworld.com 获取武器的 ID
     global ARMS_HTML_LIST
     if ARMS_HTML_LIST == None:
         ARMS_HTML_LIST = []
